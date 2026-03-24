@@ -11,7 +11,6 @@
             --primary-brown: #a68b7c;
             --text-dark: #4e342e;
             --white: #ffffff;
-            --glass: rgba(255, 255, 255, 0.85);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -22,6 +21,22 @@
             color: var(--text-dark);
             overflow-x: hidden;
             line-height: 1.6;
+        }
+
+        /* FOTOĞRAF EKRANI - BASILINCA GELEN */
+        #photoPage {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #000;
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        #photoPage img {
+            max-width: 100%;
+            max-height: 100vh;
+            object-fit: contain;
         }
 
         #snowCanvas {
@@ -50,118 +65,63 @@
             font-weight: 400;
         }
 
-        /* BANNER - Sinematik Şerit */
+        /* BANNER */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1200&q=80');
+            background: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1200&q=80');
             background-size: cover;
             background-position: center 30%;
-            height: 25vh;
+            height: 40vh;
             width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 40px;
-            box-shadow: inset 0 0 50px rgba(0,0,0,0.1);
-        }
-        .hero h2 { 
-            font-family: 'Playfair Display', serif; 
-            font-size: 22px; 
-            color: #fff; 
-            letter-spacing: 4px; 
-            text-transform: uppercase;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
-            font-style: italic;
-        }
-
-        /* YENİ TASARIM: Alışverişe Başla (CTA) */
-        .cta-container {
-            position: relative;
-            margin: 0 15px 50px;
-            padding: 60px 20px;
-            border-radius: 25px;
-            overflow: hidden;
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-align: center;
-            background: url('https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&w=1200&q=80');
-            background-size: cover;
-            background-position: center;
-            box-shadow: 0 15px 35px rgba(166, 139, 124, 0.15);
+            justify-content: center;
+            margin-bottom: 40px;
         }
-
-        .cta-glass-card {
-            background: var(--glass);
-            backdrop-filter: blur(8px);
-            padding: 40px 30px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            max-width: 500px;
-            width: 90%;
-        }
-
-        .cta-glass-card h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: var(--text-dark);
-            font-weight: 600;
-        }
-
-        .cta-glass-card p {
-            font-size: 14px;
+        .hero h2 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 24px; 
+            color: #fff; 
+            letter-spacing: 4px; 
+            text-transform: uppercase;
+            text-shadow: 2px 2px 15px rgba(0,0,0,0.4);
             margin-bottom: 25px;
-            font-weight: 300;
-            color: #6d4c41;
+            text-align: center;
         }
 
-        /* Efektli Buton */
         .btn-premium {
             display: inline-block;
             padding: 16px 45px;
-            background: var(--text-dark);
-            color: #fff;
+            background: var(--white);
+            color: var(--text-dark);
             text-decoration: none;
-            font-size: 12px;
+            font-size: 11px;
             letter-spacing: 3px;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
             border-radius: 50px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            transition: 0.3s;
         }
 
-        .btn-premium::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: 0.5s;
+        /* ÖZELLİKLER */
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 30px 10px;
+            background: rgba(255,255,255,0.6);
+            margin-bottom: 50px;
         }
+        .feature-item { text-align: center; width: 45%; margin-bottom: 20px; }
+        .feature-item h4 { font-size: 11px; letter-spacing: 1px; margin-bottom: 3px; text-transform: uppercase; }
+        .feature-item p { font-size: 9px; color: #888; }
 
-        .btn-premium:hover {
-            transform: translateY(-3px);
-            background: var(--primary-brown);
-            box-shadow: 0 8px 25px rgba(166, 139, 124, 0.4);
-        }
+        .section-title { text-align: center; font-size: 16px; letter-spacing: 5px; margin-bottom: 30px; text-transform: uppercase; font-weight: 400; }
 
-        .btn-premium:hover::before {
-            left: 100%;
-        }
-
-        .section-title { 
-            text-align: center; 
-            font-size: 16px;
-            letter-spacing: 5px; 
-            margin-bottom: 30px; 
-            text-transform: uppercase;
-            font-weight: 400;
-        }
-
-        /* ÜRÜN GRİD */
+        /* ÜRÜNLER */
         .product-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -170,7 +130,6 @@
             max-width: 1200px;
             margin: 0 auto 60px;
         }
-
         .product-card {
             background: var(--white);
             border-radius: 15px;
@@ -178,41 +137,45 @@
             border: 1px solid #f1eeeb;
             text-align: center;
             padding-bottom: 15px;
-            transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
-
-        .product-img {
-            width: 100%;
-            aspect-ratio: 3/4; 
-            background-size: cover;
-            background-position: center;
-            margin-bottom: 10px;
-        }
-
+        .product-img { width: 100%; aspect-ratio: 3/4; background-size: cover; background-position: center; margin-bottom: 10px; }
         .product-title { font-size: 11px; font-weight: 600; padding: 0 10px; margin-bottom: 5px; height: 32px; overflow: hidden; }
         .price { font-size: 14px; color: var(--primary-brown); font-weight: 700; }
 
-        footer { padding: 60px 20px; text-align: center; font-size: 11px; color: #a68b7c; letter-spacing: 2px; border-top: 1px solid #f1eeeb; }
+        /* INSTAGRAM */
+        .instagram-section {
+            text-align: center;
+            padding: 60px 15px;
+            background: #fff;
+            margin-bottom: 40px;
+        }
+        .insta-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-dark);
+        }
 
-        /* Kaydırma Efekti */
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        footer { padding: 40px 20px; text-align: center; font-size: 10px; color: #a68b7c; letter-spacing: 2px; border-top: 1px solid #f1eeeb; }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* MASAÜSTÜ AYARLARI */
         @media (min-width: 900px) {
-            header h1 { font-size: 36px; }
-            .hero { height: 40vh; border-radius: 30px; width: calc(100% - 100px); margin: 0 auto 60px; }
+            .hero { height: 60vh; width: calc(100% - 100px); margin: 0 auto 60px; border-radius: 30px; }
             .hero h2 { font-size: 40px; }
-            .product-grid { grid-template-columns: repeat(4, 1fr); gap: 30px; padding: 0; }
-            .product-img { aspect-ratio: 1/1; } 
-            .cta-container { margin: 0 auto 80px; max-width: 1100px; height: 400px; justify-content: center; }
-            .cta-glass-card { padding: 50px; }
-            .cta-glass-card h3 { font-size: 32px; }
-            .section-title { font-size: 20px; }
+            .product-grid { grid-template-columns: repeat(4, 1fr); gap: 30px; }
+            .feature-item { width: 22%; }
         }
     </style>
 </head>
 <body>
+
+    <div id="photoPage">
+        <img src="https://dolmabahceokullari.com.tr/wp-content/uploads/2023/06/ata-674x1024.webp" alt="Atatürk">
+    </div>
 
     <canvas id="snowCanvas"></canvas>
     <div class="shipping-bar">750 TL ÜZERİ KARGO BEDAVA</div>
@@ -223,101 +186,86 @@
 
     <section class="hero reveal">
         <h2>Yeni Sezon Işıltısı</h2>
+        <button onclick="goToPhoto()" class="btn-premium">Alışverişe Başla</button>
     </section>
 
-    <section class="cta-container reveal">
-        <div class="cta-glass-card">
-            <h3>Işıltını Keşfet</h3>
-            <p>Seni anlatan en özel parçalarla tarzını bir adım öteye taşı. Sınırlı sayıdaki yeni koleksiyon yayında.</p>
-            <a href="#" class="btn-premium">Alışverişe Başla</a>
-        </div>
+    <section class="features reveal">
+        <div class="feature-item"><h4>Ücretsiz Kargo</h4><p>750 TL üzeri</p></div>
+        <div class="feature-item"><h4>Özel Tasarım</h4><p>Zarif detaylar</p></div>
+        <div class="feature-item"><h4>Hızlı Teslimat</h4><p>24 saatte kargo</p></div>
+        <div class="feature-item"><h4>Antialerjik</h4><p>Cilt dostu materyal</p></div>
     </section>
 
-    <h3 class="section-title reveal">En Çok Sevilenler</h3>
-    
+    <h3 class="section-title reveal">Sizin İçin Seçtiklerimiz</h3>
     <div class="product-grid">
         <div class="product-card reveal">
             <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=500&q=80')"></div>
-            <p class="product-title">İnci Detay Kolye</p>
-            <p class="price">249,00 TL</p>
+            <p class="product-title">İnci Detay Kolye</p><p class="price">249,00 TL</p>
         </div>
         <div class="product-card reveal">
             <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=500&q=80')"></div>
-            <p class="product-title">Rose Baget Yüzük</p>
-            <p class="price">189,00 TL</p>
+            <p class="product-title">Rose Baget Yüzük</p><p class="price">189,00 TL</p>
         </div>
         <div class="product-card reveal">
             <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=500&q=80')"></div>
-            <p class="product-title">Minimal Küpe Seti</p>
-            <p class="price">159,00 TL</p>
+            <p class="product-title">Minimal Küpe Seti</p><p class="price">159,00 TL</p>
         </div>
         <div class="product-card reveal">
             <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=500&q=80')"></div>
-            <p class="product-title">Işıltılı Gold Bileklik</p>
-            <p class="price">219,00 TL</p>
+            <p class="product-title">Işıltılı Gold Bileklik</p><p class="price">219,00 TL</p>
         </div>
     </div>
+
+    <section class="instagram-section reveal">
+        <h3 class="section-title">Bizi Takip Edin</h3>
+        <a href="https://www.instagram.com/basakaccessoriess" target="_blank" class="insta-container">
+            <span style="font-size: 24px;">📸</span>
+            <span style="font-size: 16px; letter-spacing: 1px;">@basakaccessoriess</span>
+        </a>
+    </section>
 
     <footer>&copy; 2026 BASAKACCESORIES</footer>
 
     <script>
+        function goToPhoto() {
+            document.getElementById('photoPage').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
         function reveal() {
             const reveals = document.querySelectorAll(".reveal");
-            for (let i = 0; i < reveals.length; i++) {
-                const windowHeight = window.innerHeight;
-                const elementTop = reveals[i].getBoundingClientRect().top;
-                const elementVisible = 100;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active");
-                }
-            }
+            reveals.forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 50) el.classList.add("active");
+            });
         }
         window.addEventListener("scroll", reveal);
         window.addEventListener("load", reveal);
 
         const canvas = document.getElementById('snowCanvas');
         const ctx = canvas.getContext('2d');
-        let width, height, snowflakes;
+        let width, height, snowflakes = [];
 
         function init() {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            canvas.width = width;
-            canvas.height = height;
+            width = window.innerWidth; height = window.innerHeight;
+            canvas.width = width; canvas.height = height;
             snowflakes = [];
-            const count = width < 768 ? 50 : 120;
-            for(let i=0; i<count; i++) snowflakes.push(new Snowflake());
-        }
-
-        class Snowflake {
-            constructor() { this.reset(); this.y = Math.random() * height; }
-            reset() {
-                this.x = Math.random() * width;
-                this.y = -10;
-                this.radius = Math.random() * 2 + 0.5;
-                this.speed = Math.random() * 0.6 + 0.2;
-                this.wind = Math.random() * 0.2 - 0.1;
-            }
-            update() {
-                this.y += this.speed;
-                this.x += this.wind;
-                if(this.y > height) this.reset();
-            }
-            draw() {
-                ctx.fillStyle = 'rgba(166, 139, 124, 0.35)';
-                ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2); ctx.fill();
-            }
+            for(let i=0; i<60; i++) snowflakes.push({
+                x: Math.random()*width, y: Math.random()*height, 
+                r: Math.random()*1.5, s: Math.random()*0.3+0.1
+            });
         }
 
         function animate() {
-            ctx.clearRect(0, 0, width, height);
-            snowflakes.forEach(s => { s.update(); s.draw(); });
+            ctx.clearRect(0,0,width,height);
+            ctx.fillStyle = 'rgba(166, 139, 124, 0.2)';
+            snowflakes.forEach(f => {
+                f.y += f.s; if(f.y > height) f.y = -5;
+                ctx.beginPath(); ctx.arc(f.x, f.y, f.r, 0, Math.PI*2); ctx.fill();
+            });
             requestAnimationFrame(animate);
         }
-
         window.addEventListener('resize', init);
-        init();
-        animate();
+        init(); animate();
     </script>
 </body>
 </html>
