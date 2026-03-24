@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>basakaccesories | Snow & Minimal Luxury</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Modern ve Soft-Dark Renk Paleti */
+        :root {
+            --bg-dark: #0f0f0f;
+            --bg-card: rgba(30, 30, 30, 0.7); /* Şeffaf kartlar */
+            --primary-rose: #e2d1c3; /* Soft Rose Gold / Bej */
+            --text-main: #ffffff;
+            --text-muted: #d1d1d1;
+            --shadow: 0 4px 15px rgba(0,0,0,0.4);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body { 
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-dark); 
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Kar Efekti İçin Canvas Ayarı */
+        #snowCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* İçeriğin arkasında */
+            pointer-events: none;
+        }
+
+        /* Üst Slogan */
+        .shipping-bar {
+            background: linear-gradient(90deg, #bcaaa4, #e2d1c3);
+            color: #000;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 11px;
+            letter-spacing: 2px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* Header / Site İsmi */
+        header {
+            text-align: center;
+            padding: 40px 0;
+            background: transparent;
+        }
+        header h1 {
+            font-size: 30px;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            font-weight: 200;
+            color: var(--primary-rose);
+            text-shadow: 0 0 10px rgba(226, 209, 195, 0.3);
+        }
+
+        /* Hero Kampanya Alanı */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1000&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-radius: 20px;
+            margin: 0 20px 40px 20px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(2px);
+        }
+        .hero h2 { font-size: 36px; margin-bottom: 15px; font-weight: 600; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+        .hero p { font-size: 18px; color: var(--primary-rose); font-weight: 200; }
+
+        /* Kategori Butonları */
+        .categories-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+            overflow-x: auto;
+            background-color: transparent;
+        }
+        .btn-shop {
+            padding: 12px 25px;
+            border: 1px solid var(--primary-rose);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--primary-rose);
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 1px;
+            transition: 0.4s all ease;
+            backdrop-filter: blur(5px);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .btn-shop:hover {
+            background: var(--primary-rose);
+            color: #000;
+            box-shadow: 0 0 15px rgba(226, 209, 195, 0.5);
+        }
+
+        /* Ürün Listesi */
+        .section-title { 
+            text-align: center; 
+            font-weight: 200; 
+            letter-spacing: 4px; 
+            margin: 60px 0 40px; 
+            text-transform: uppercase; 
+            color: var(--text-main);
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 1px;
+            background: var(--primary-rose);
+            margin: 10px auto;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            padding: 0 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: 0.3s all ease;
+            box-shadow: var(--shadow);
+        }
+        .product-card:hover { 
+            transform: translateY(-10px); 
+            border-color: var(--primary-rose);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .product-img { 
+            width: 100%; 
+            aspect-ratio: 1/1; 
+            background: #222; 
+            border-radius: 10px; 
+            margin-bottom: 20px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: #444; 
+            font-size: 12px;
+            border: 1px dashed #333;
+        }
+
+        .product-title { font-size: 15px; margin-bottom: 8px; color: var(--text-muted); font-weight: 300; }
+        .price { font-weight: 600; font-size: 17px; color: var(--primary-rose); }
+
+        /* Yeni Bölüm: Haftanın Kombini */
+        .look-section {
+            display: flex;
+            align-items: center;
+            background: rgba(255,255,255,0.03);
+            margin: 80px 20px;
+            border-radius: 20px;
+            padding: 40px;
+            gap: 40px;
+            box-shadow: var(--shadow);
+        }
+        .look-img {
+            flex: 1;
+            height: 400px;
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1584377334016-464803e03b80?auto=format&fit=crop&w=600&q=80');
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+        }
+        .look-text { flex: 1; }
+        .look-text h3 { font-size: 24px; font-weight: 200; letter-spacing: 3px; margin-bottom: 20px; text-transform: uppercase; color: var(--primary-rose); }
+        .look-text p { font-size: 15px; color: var(--text-muted); font-weight: 300; margin-bottom: 30px; }
+
+        /* Yeni Bölüm: Abone Olma Formu */
+        .newsletter {
+            text-align: center;
+            padding: 80px 20px;
+            background: var(--bg-card);
+            margin: 80px 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .newsletter h3 { font-size: 20px; font-weight: 300; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; color: var(--primary-rose); }
+        .newsletter p { font-size: 14px; color: var(--text-muted); margin-bottom: 30px; font-weight: 200; }
+        .newsletter input {
+            padding: 12px 20px;
+            width: 300px;
+            max-width: 100%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid #333;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .newsletter input:focus { outline: none; border-color: var(--primary-rose); }
+        .btn-subscribe {
+            padding: 12px 25px;
+            background: var(--primary-rose);
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+        .btn-subscribe:hover { box-shadow: 0 0 15px rgba(226, 209, 195, 0.7); }
+
+        /* Alt Bilgi */
+        footer {
+            text-align: center;
+            padding: 50px;
+            font-size: 12px;
+            color: #555;
+            letter-spacing: 2px;
+            border-top: 1px solid #1a1a1a;
+        }
+
+        /* Mobil Uyumluluk */
+        @media (max-width: 768px) {
+            .hero h2 { font-size: 24px; }
+            .categories-container { justify-content: flex-start; }
+            .look-section { flex-direction: column; padding: 20px; text-align: center; }
+            .look-img { height: 250px; width: 100%; flex: none; }
+            .newsletter input { margin-bottom: 15px; width: 100%; margin-right: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="snowCanvas"></canvas>
+
+    <div class="shipping-bar">750 TL ÜZERİ KARGO BEDAVA</div>
+
+    <header>
+        <h1>basakaccesories</h1>
+    </header>
+
+    <section class="hero">
+        <h2>1 AKSESUAR ALANA<br>ANAHTARLIK BİZDEN!</h2>
+        <p>Soft Işıltıyı ve Kış Şıklığını Keşfet</p>
+    </section>
+
+    <div class="categories-container">
+        <a href="#" class="btn-shop">KOLYE</a>
+        <a href="#" class="btn-shop">BİLEKLİK</a>
+        <a href="#" class="btn-shop">YÜZÜK</a>
+        <a href="#" class="btn-shop">KÜPE</a>
+        <a href="#" class="btn-shop">ANAHTARLIK</a>
+    </div>
+
+    <h3 class="section-title">En Çok Sevilenler</h3>
+    <div class="product-grid">
+        <div class="product-card">
+            <div class="product-img">KOLYE RESMİ</div>
+            <p class="product-title">Kış Zinciri Kolye</p>
+            <p class="price">249,00 TL</p>
+        </div>
+        <div class="product-card">
+            <div class="product-img">YÜZÜK RESMİ</div>
+            <p class="product-title">Rose Baget Yüzük</p>
+            <p class="price">189,00 TL</p>
+        </div>
+        <div class="product-card">
+            <div class="product-img">KÜPE RESMİ</div>
+            <p class="product-title">Minimal Küpe</p>
+            <p class="price">159,00 TL</p>
+        </div>
+        <div class="product-card">
+            <div class="product-img">BİLEKLİK RESMİ</div>
+            <p class="product-title">Işıltılı Bileklik</p>
+            <p class="price">219,00 TL</p>
+        </div>
+        <div class="product-card">
+            <div class="product-img">HALHAL RESMİ</div>
+            <p class="product-title">Yıldız Figür Halhal</p>
+            <p class="price">129,00 TL</p>
+        </div>
+        <div class="product-card">
+            <div class="product-img">ANAHTARLIK RESMİ</div>
+            <p class="product-title">Motto Anahtarlık</p>
+            <p class="price">89,00 TL</p>
+        </div>
+    </div>
+
+    <section class="look-section">
+        <div class="look-img"></div>
+        <div class="look-text">
+            <h3>Haftanın Kombini</h3>
+            <p>Kışın en asil rengi antrasit ve Rose Gold'un mükemmel uyumu. Minimalist takılarımızla kış stilini tamamla. Sezonun en hit parçası 'Soft Zincir Kolye' ve 'Rose Baget Yüzük' bu hafta sadece 399 TL!</p>
+            <a href="#" class="btn-shop">KOMBİNİ KEŞFET</a>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <h3>İndirimlerden Haberdar Ol</h3>
+        <p>E-posta listemize katıl, yeni koleksiyonlar ve özel fırsatları kaçırma.</p>
+        <form>
+            <input type="email" placeholder="E-posta adresiniz..." required>
+            <button type="submit" class="btn-subscribe">ABONE OL</button>
+        </form>
+    </section>
+
+    <footer>
+        &copy; 2026 BASAKACCESORIES - ALL RIGHTS RESERVED.
+    </footer>
+
+    <script>
+        // Kar Efekti Scripti (Geliştirilmiş)
+        const canvas = document.getElementById('snowCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const snowflakes = [];
+
+        class Snowflake {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.radius = Math.random() * 2 + 0.5; // Kar tanesi boyutu
+                this.speed = Math.random() * 1.5 + 0.5; // Kar tanesi hızı (yavaşlatıldı)
+                this.wind = Math.random() * 0.5 - 0.25; // Hafif rüzgar etkisi
+            }
+
+            fall() {
+                this.y += this.speed;
+                this.x += this.wind; // Rüzgarla yana kayma
+
+                if (this.y > canvas.height) {
+                    this.y = -5;
+                    this.x = Math.random() * canvas.width;
+                }
+                // Ekranın yanlarından çıkarsa diğer taraftan girsin
+                if (this.x > canvas.width) {
+                    this.x = 0;
+                } else if (this.x < 0) {
+                    this.x = canvas.width;
+                }
+            }
+
+            draw() {
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.6)'; // Yumuşak beyaz kar
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 150; i++) { // Kar tanesi sayısı
+            snowflakes.push(new Snowflake());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            snowflakes.forEach(flake => {
+                flake.fall();
+                flake.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
