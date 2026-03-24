@@ -3,29 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>basakaccesories | Premium Experience</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;600&display=swap" rel="stylesheet">
+    <title>basakaccesories | Soft & Elegant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #080808;
-            --bg-card: rgba(20, 20, 20, 0.7);
-            --primary-rose: #e2d1c3;
-            --text-main: #ffffff;
-            --text-muted: #aaaaaa;
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --bg-creme: #fdfaf7;      /* Ana arka plan */
+            --bg-card: #ffffff;       /* Beyaz kartlar */
+            --primary-brown: #a68b7c; /* Sütlü kahve */
+            --text-dark: #4e342e;     /* Koyu kahve yazılar */
+            --accent-beige: #d7ccc8;  /* Yumuşak bej */
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body { 
             font-family: 'Montserrat', sans-serif;
-            background-color: var(--bg-dark); 
-            color: var(--text-main);
+            background-color: var(--bg-creme); 
+            color: var(--text-dark);
             overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
         }
 
-        /* Kar Efekti */
+        /* Kar Efekti (Arka Plan) */
         #snowCanvas {
             position: fixed;
             top: 0;
@@ -36,10 +34,9 @@
             pointer-events: none;
         }
 
-        /* Üst Slogan */
         .shipping-bar {
-            background: linear-gradient(90deg, #bcaaa4, #e2d1c3);
-            color: #000;
+            background-color: var(--primary-brown);
+            color: #fff;
             text-align: center;
             padding: 10px 0;
             font-size: 11px;
@@ -48,188 +45,107 @@
             text-transform: uppercase;
         }
 
-        /* Header */
-        header {
-            text-align: center;
-            padding: 40px 0;
-        }
+        header { padding: 40px 0; text-align: center; }
         header h1 {
-            font-size: 28px;
-            letter-spacing: 10px;
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            letter-spacing: 6px;
             text-transform: uppercase;
-            font-weight: 200;
-            color: var(--primary-rose);
+            font-weight: 400;
         }
 
-        /* Hero Alanı */
+        /* Hero (Ana Görsel) */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1200&q=80');
+            background: linear-gradient(rgba(166, 139, 124, 0.2), rgba(0,0,0,0.1)), url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1200&q=80');
             background-size: cover;
             background-position: center;
-            height: 70vh; /* Bilgisayarda yüksek ekran */
+            height: 55vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            margin: 0 20px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             text-align: center;
-            margin: 0 40px 50px 40px;
-            border-radius: 30px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-            backdrop-filter: blur(1px);
         }
-        .hero h2 { font-size: 42px; margin-bottom: 15px; font-weight: 600; letter-spacing: 2px; }
-        .hero p { font-size: 18px; color: var(--primary-rose); font-weight: 300; }
+        .hero h2 { font-family: 'Playfair Display', serif; font-size: 36px; color: #fff; margin-bottom: 10px; text-shadow: 1px 1px 10px rgba(0,0,0,0.2); }
+        .hero p { color: #fff; font-size: 16px; font-weight: 200; }
 
-        /* Kategoriler */
-        .categories-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            padding: 20px;
-            flex-wrap: wrap; /* Mobilde alt alta geçsin diye */
-        }
-        .btn-shop {
-            padding: 14px 30px;
-            border: 1px solid var(--primary-rose);
-            background: rgba(255, 255, 255, 0.02);
-            color: var(--primary-rose);
-            text-decoration: none;
-            font-size: 12px;
-            letter-spacing: 2px;
-            transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            backdrop-filter: blur(10px);
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-        .btn-shop:hover {
-            background: var(--primary-rose);
-            color: #000;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(226, 209, 195, 0.3);
-        }
-
-        /* Ürün Listesi */
+        /* Ürün Grid Yapısı */
         .section-title { 
             text-align: center; 
-            font-size: 22px;
-            font-weight: 200; 
-            letter-spacing: 5px; 
-            margin: 80px 0 40px; 
+            font-size: 18px;
+            letter-spacing: 4px; 
+            margin-bottom: 30px; 
             text-transform: uppercase;
+            font-weight: 400;
         }
 
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* Bilgisayarda 4'lü */
-            gap: 30px;
-            padding: 0 40px;
-            max-width: 1400px;
-            margin: 0 auto;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            padding: 0 20px;
+            max-width: 1200px;
+            margin: 0 auto 50px;
         }
 
         .product-card {
             background: var(--bg-card);
-            padding: 25px;
-            border-radius: 20px;
-            text-align: center;
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(15px);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid #f1eeeb;
             transition: 0.4s;
+            text-align: center;
+            padding-bottom: 20px;
         }
-        .product-card:hover { 
-            transform: translateY(-10px); 
-            border-color: var(--primary-rose);
-            background: rgba(35, 35, 35, 0.8);
-        }
+        .product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(166, 139, 124, 0.1); }
 
-        .product-img { 
-            width: 100%; 
-            aspect-ratio: 1/1; 
-            background: #151515; 
-            border-radius: 12px; 
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #333;
-            font-size: 11px;
-            border: 1px dashed #222;
-        }
-
-        .product-title { font-size: 14px; margin-bottom: 8px; color: var(--text-muted); font-weight: 400; }
-        .price { font-weight: 600; font-size: 18px; color: var(--primary-rose); }
-
-        /* Haftanın Kombini */
-        .look-section {
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.02);
-            margin: 100px 40px;
-            border-radius: 30px;
-            padding: 60px;
-            gap: 60px;
-            border: 1px solid var(--glass-border);
-        }
-        .look-img {
-            flex: 1;
-            height: 500px;
-            background: url('https://images.unsplash.com/photo-1584377334016-464803e03b80?auto=format&fit=crop&w=800&q=80');
+        .product-img {
+            width: 100%;
+            aspect-ratio: 1/1;
             background-size: cover;
             background-position: center;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-bottom: 15px;
         }
-        .look-text { flex: 1; }
-        .look-text h3 { font-size: 28px; margin-bottom: 20px; color: var(--primary-rose); font-weight: 200; letter-spacing: 4px; text-transform: uppercase; }
-        .look-text p { font-size: 16px; color: var(--text-muted); margin-bottom: 35px; line-height: 1.8; font-weight: 300; }
 
-        /* Abone Formu */
-        .newsletter {
-            text-align: center;
+        .product-title { font-size: 14px; color: var(--text-dark); margin-bottom: 5px; font-weight: 600; }
+        .price { color: var(--primary-brown); font-weight: 400; font-size: 16px; }
+
+        /* YENİ: Alışverişe Başla Bölümü */
+        .cta-section {
+            background-color: var(--accent-beige);
+            margin: 60px 20px;
             padding: 80px 20px;
-            margin: 100px 40px;
-            background: var(--bg-card);
-            border-radius: 30px;
-            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            text-align: center;
+            background-image: linear-gradient(rgba(215, 204, 200, 0.8), rgba(215, 204, 200, 0.8)), url('https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
         }
-        .newsletter input {
-            width: 350px;
-            padding: 16px;
-            background: rgba(0,0,0,0.4);
-            border: 1px solid #333;
-            color: #fff;
-            margin-right: 15px;
-            border-radius: 8px;
-            font-family: inherit;
-        }
-        .btn-subscribe {
+        .cta-section h3 { font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 20px; }
+        .btn-main {
+            display: inline-block;
             padding: 16px 40px;
-            background: var(--primary-rose);
-            border: none;
+            background-color: var(--text-dark);
+            color: #fff;
+            text-decoration: none;
             font-weight: 600;
-            border-radius: 8px;
-            cursor: pointer;
+            letter-spacing: 2px;
             text-transform: uppercase;
             font-size: 12px;
+            border-radius: 5px;
             transition: 0.3s;
         }
+        .btn-main:hover { background-color: var(--primary-brown); transform: scale(1.05); }
 
-        footer { padding: 60px; text-align: center; font-size: 12px; color: #444; letter-spacing: 3px; }
+        footer { padding: 40px; text-align: center; font-size: 11px; color: #a68b7c; letter-spacing: 2px; }
 
-        /* TELEFON AYARLARI (RESPONSIVE) */
-        @media (max-width: 900px) {
-            header h1 { font-size: 20px; letter-spacing: 5px; }
-            .hero { height: 45vh; margin: 0 15px 30px 15px; border-radius: 15px; }
-            .hero h2 { font-size: 22px; }
-            .hero p { font-size: 14px; }
-            .product-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 0 15px; }
-            .look-section { flex-direction: column; margin: 60px 15px; padding: 30px; gap: 30px; text-align: center; }
-            .look-img { height: 300px; width: 100%; }
-            .newsletter { margin: 60px 15px; padding: 40px 20px; }
-            .newsletter input { width: 100%; margin-right: 0; margin-bottom: 15px; }
-            .btn-subscribe { width: 100%; }
-            .categories-container { gap: 10px; overflow-x: auto; justify-content: flex-start; padding: 0 15px 20px 15px; flex-wrap: nowrap; }
-            .btn-shop { padding: 10px 20px; font-size: 10px; }
+        @media (max-width: 768px) {
+            .product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .hero h2 { font-size: 26px; }
+            .cta-section { padding: 50px 20px; }
         }
     </style>
 </head>
@@ -244,39 +160,38 @@
     </header>
 
     <section class="hero">
-        <h2>1 AKSESUAR ALANA<br>ANAHTARLIK BİZDEN!</h2>
-        <p>Işıltılı Kış Koleksiyonu</p>
+        <h2>Yeni Sezon Işıltısı</h2>
+        <p>Hediye anahtarlık fırsatını kaçırma.</p>
     </section>
-
-    <div class="categories-container">
-        <a href="#" class="btn-shop">KOLYE</a>
-        <a href="#" class="btn-shop">BİLEKLİK</a>
-        <a href="#" class="btn-shop">YÜZÜK</a>
-        <a href="#" class="btn-shop">KÜPE</a>
-        <a href="#" class="btn-shop">ANAHTARLIK</a>
-    </div>
 
     <h3 class="section-title">En Çok Sevilenler</h3>
     <div class="product-grid">
-        <div class="product-card"><div class="product-img">RESİM</div><p class="product-title">Zincir Kolye</p><p class="price">249 TL</p></div>
-        <div class="product-card"><div class="product-img">RESİM</div><p class="product-title">Baget Yüzük</p><p class="price">189 TL</p></div>
-        <div class="product-card"><div class="product-img">RESİM</div><p class="product-title">Minimal Küpe</p><p class="price">159 TL</p></div>
-        <div class="product-card"><div class="product-img">RESİM</div><p class="product-title">Gold Bileklik</p><p class="price">219 TL</p></div>
+        <div class="product-card">
+            <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=500&q=80')"></div>
+            <p class="product-title">İnci Detay Kolye</p>
+            <p class="price">249,00 TL</p>
+        </div>
+        <div class="product-card">
+            <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=500&q=80')"></div>
+            <p class="product-title">Rose Baget Yüzük</p>
+            <p class="price">189,00 TL</p>
+        </div>
+        <div class="product-card">
+            <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=500&q=80')"></div>
+            <p class="product-title">Minimal Halka Küpe</p>
+            <p class="price">159,00 TL</p>
+        </div>
+        <div class="product-card">
+            <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=500&q=80')"></div>
+            <p class="product-title">Altın Işıltılı Bileklik</p>
+            <p class="price">219,00 TL</p>
+        </div>
     </div>
 
-    <section class="look-section">
-        <div class="look-img"></div>
-        <div class="look-text">
-            <h3>Haftanın Kombini</h3>
-            <p>Kışın soğuk havasını Rose Gold'un sıcak ışıltısıyla kırın. Minimalist tasarımlarımız her kıyafetinize asalet katmak için tasarlandı.</p>
-            <a href="#" class="btn-shop">KOMBİNİ İNCELE</a>
-        </div>
-    </section>
-
-    <section class="newsletter">
-        <h3>Özel Fırsatları Kaçırma</h3>
-        <input type="email" placeholder="E-posta adresinizi yazın">
-        <button class="btn-subscribe">Abone Ol</button>
+    <section class="cta-section">
+        <h3>Tüm Koleksiyonu Keşfetmeye Hazır Mısın?</h3>
+        <p style="margin-bottom: 30px; font-weight: 300;">Stilini tamamlayacak en özel parçalar seni bekliyor.</p>
+        <a href="#" class="btn-main">Alışverişe Başla</a>
     </section>
 
     <footer>&copy; 2026 BASAKACCESORIES</footer>
@@ -292,8 +207,7 @@
             canvas.width = width;
             canvas.height = height;
             snowflakes = [];
-            const count = width < 900 ? 60 : 180; // Mobilde az, PC'de çok kar
-            for(let i=0; i<count; i++) snowflakes.push(new Snowflake());
+            for(let i=0; i<120; i++) snowflakes.push(new Snowflake());
         }
 
         class Snowflake {
@@ -301,9 +215,9 @@
             reset() {
                 this.x = Math.random() * width;
                 this.y = -10;
-                this.radius = Math.random() * (width < 900 ? 1.5 : 2.5) + 0.5;
-                this.speed = Math.random() * 0.8 + 0.2;
-                this.wind = Math.random() * 0.3 - 0.15;
+                this.radius = Math.random() * 2 + 1;
+                this.speed = Math.random() * 0.7 + 0.3;
+                this.wind = Math.random() * 0.2 - 0.1;
             }
             update() {
                 this.y += this.speed;
@@ -311,7 +225,7 @@
                 if(this.y > height) this.reset();
             }
             draw() {
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+                ctx.fillStyle = 'rgba(166, 139, 124, 0.4)';
                 ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2); ctx.fill();
             }
         }
