@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>basakaccesories | Snow & Minimal Luxury</title>
+    <title>basakaccesories | Premium Experience</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* Modern ve Soft-Dark Renk Paleti */
         :root {
-            --bg-dark: #0f0f0f;
-            --bg-card: rgba(30, 30, 30, 0.7); /* Şeffaf kartlar */
-            --primary-rose: #e2d1c3; /* Soft Rose Gold / Bej */
+            --bg-dark: #080808;
+            --bg-card: rgba(20, 20, 20, 0.7);
+            --primary-rose: #e2d1c3;
             --text-main: #ffffff;
-            --text-muted: #d1d1d1;
-            --shadow: 0 4px 15px rgba(0,0,0,0.4);
+            --text-muted: #aaaaaa;
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -22,18 +21,18 @@
             font-family: 'Montserrat', sans-serif;
             background-color: var(--bg-dark); 
             color: var(--text-main);
-            line-height: 1.6;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Kar Efekti İçin Canvas Ayarı */
+        /* Kar Efekti */
         #snowCanvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* İçeriğin arkasında */
+            z-index: -1;
             pointer-events: none;
         }
 
@@ -49,208 +48,188 @@
             text-transform: uppercase;
         }
 
-        /* Header / Site İsmi */
+        /* Header */
         header {
             text-align: center;
             padding: 40px 0;
-            background: transparent;
         }
         header h1 {
-            font-size: 30px;
-            letter-spacing: 8px;
+            font-size: 28px;
+            letter-spacing: 10px;
             text-transform: uppercase;
             font-weight: 200;
             color: var(--primary-rose);
-            text-shadow: 0 0 10px rgba(226, 209, 195, 0.3);
         }
 
-        /* Hero Kampanya Alanı */
+        /* Hero Alanı */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1000&q=80');
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1200&q=80');
             background-size: cover;
             background-position: center;
-            height: 60vh;
+            height: 70vh; /* Bilgisayarda yüksek ekran */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            border-radius: 20px;
-            margin: 0 20px 40px 20px;
-            box-shadow: var(--shadow);
-            backdrop-filter: blur(2px);
+            margin: 0 40px 50px 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            backdrop-filter: blur(1px);
         }
-        .hero h2 { font-size: 36px; margin-bottom: 15px; font-weight: 600; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
-        .hero p { font-size: 18px; color: var(--primary-rose); font-weight: 200; }
+        .hero h2 { font-size: 42px; margin-bottom: 15px; font-weight: 600; letter-spacing: 2px; }
+        .hero p { font-size: 18px; color: var(--primary-rose); font-weight: 300; }
 
-        /* Kategori Butonları */
+        /* Kategoriler */
         .categories-container {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
             padding: 20px;
-            overflow-x: auto;
-            background-color: transparent;
+            flex-wrap: wrap; /* Mobilde alt alta geçsin diye */
         }
         .btn-shop {
-            padding: 12px 25px;
+            padding: 14px 30px;
             border: 1px solid var(--primary-rose);
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.02);
             color: var(--primary-rose);
             text-decoration: none;
             font-size: 12px;
-            letter-spacing: 1px;
-            transition: 0.4s all ease;
-            backdrop-filter: blur(5px);
-            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            backdrop-filter: blur(10px);
             font-weight: 600;
+            text-transform: uppercase;
         }
         .btn-shop:hover {
             background: var(--primary-rose);
             color: #000;
-            box-shadow: 0 0 15px rgba(226, 209, 195, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(226, 209, 195, 0.3);
         }
 
         /* Ürün Listesi */
         .section-title { 
             text-align: center; 
+            font-size: 22px;
             font-weight: 200; 
-            letter-spacing: 4px; 
-            margin: 60px 0 40px; 
-            text-transform: uppercase; 
-            color: var(--text-main);
-            position: relative;
-        }
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 50px;
-            height: 1px;
-            background: var(--primary-rose);
-            margin: 10px auto;
+            letter-spacing: 5px; 
+            margin: 80px 0 40px; 
+            text-transform: uppercase;
         }
 
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 25px;
-            padding: 0 20px;
-            max-width: 1200px;
+            grid-template-columns: repeat(4, 1fr); /* Bilgisayarda 4'lü */
+            gap: 30px;
+            padding: 0 40px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
         .product-card {
             background: var(--bg-card);
             padding: 25px;
-            border-radius: 15px;
+            border-radius: 20px;
             text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: 0.3s all ease;
-            box-shadow: var(--shadow);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(15px);
+            transition: 0.4s;
         }
         .product-card:hover { 
             transform: translateY(-10px); 
             border-color: var(--primary-rose);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            background: rgba(35, 35, 35, 0.8);
         }
 
         .product-img { 
             width: 100%; 
             aspect-ratio: 1/1; 
-            background: #222; 
-            border-radius: 10px; 
-            margin-bottom: 20px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            color: #444; 
-            font-size: 12px;
-            border: 1px dashed #333;
+            background: #151515; 
+            border-radius: 12px; 
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            font-size: 11px;
+            border: 1px dashed #222;
         }
 
-        .product-title { font-size: 15px; margin-bottom: 8px; color: var(--text-muted); font-weight: 300; }
-        .price { font-weight: 600; font-size: 17px; color: var(--primary-rose); }
+        .product-title { font-size: 14px; margin-bottom: 8px; color: var(--text-muted); font-weight: 400; }
+        .price { font-weight: 600; font-size: 18px; color: var(--primary-rose); }
 
-        /* Yeni Bölüm: Haftanın Kombini */
+        /* Haftanın Kombini */
         .look-section {
             display: flex;
             align-items: center;
-            background: rgba(255,255,255,0.03);
-            margin: 80px 20px;
-            border-radius: 20px;
-            padding: 40px;
-            gap: 40px;
-            box-shadow: var(--shadow);
+            background: rgba(255, 255, 255, 0.02);
+            margin: 100px 40px;
+            border-radius: 30px;
+            padding: 60px;
+            gap: 60px;
+            border: 1px solid var(--glass-border);
         }
         .look-img {
             flex: 1;
-            height: 400px;
-            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1584377334016-464803e03b80?auto=format&fit=crop&w=600&q=80');
+            height: 500px;
+            background: url('https://images.unsplash.com/photo-1584377334016-464803e03b80?auto=format&fit=crop&w=800&q=80');
             background-size: cover;
             background-position: center;
-            border-radius: 15px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         .look-text { flex: 1; }
-        .look-text h3 { font-size: 24px; font-weight: 200; letter-spacing: 3px; margin-bottom: 20px; text-transform: uppercase; color: var(--primary-rose); }
-        .look-text p { font-size: 15px; color: var(--text-muted); font-weight: 300; margin-bottom: 30px; }
+        .look-text h3 { font-size: 28px; margin-bottom: 20px; color: var(--primary-rose); font-weight: 200; letter-spacing: 4px; text-transform: uppercase; }
+        .look-text p { font-size: 16px; color: var(--text-muted); margin-bottom: 35px; line-height: 1.8; font-weight: 300; }
 
-        /* Yeni Bölüm: Abone Olma Formu */
+        /* Abone Formu */
         .newsletter {
             text-align: center;
             padding: 80px 20px;
+            margin: 100px 40px;
             background: var(--bg-card);
-            margin: 80px 20px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 30px;
+            border: 1px solid var(--glass-border);
         }
-        .newsletter h3 { font-size: 20px; font-weight: 300; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; color: var(--primary-rose); }
-        .newsletter p { font-size: 14px; color: var(--text-muted); margin-bottom: 30px; font-weight: 200; }
         .newsletter input {
-            padding: 12px 20px;
-            width: 300px;
-            max-width: 100%;
-            background: rgba(255,255,255,0.05);
+            width: 350px;
+            padding: 16px;
+            background: rgba(0,0,0,0.4);
             border: 1px solid #333;
-            color: white;
-            font-family: 'Montserrat', sans-serif;
-            border-radius: 5px;
-            margin-right: 10px;
+            color: #fff;
+            margin-right: 15px;
+            border-radius: 8px;
+            font-family: inherit;
         }
-        .newsletter input:focus { outline: none; border-color: var(--primary-rose); }
         .btn-subscribe {
-            padding: 12px 25px;
+            padding: 16px 40px;
             background: var(--primary-rose);
-            color: #000;
             border: none;
-            border-radius: 5px;
-            cursor: pointer;
             font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
             text-transform: uppercase;
             font-size: 12px;
-            letter-spacing: 1px;
             transition: 0.3s;
         }
-        .btn-subscribe:hover { box-shadow: 0 0 15px rgba(226, 209, 195, 0.7); }
 
-        /* Alt Bilgi */
-        footer {
-            text-align: center;
-            padding: 50px;
-            font-size: 12px;
-            color: #555;
-            letter-spacing: 2px;
-            border-top: 1px solid #1a1a1a;
-        }
+        footer { padding: 60px; text-align: center; font-size: 12px; color: #444; letter-spacing: 3px; }
 
-        /* Mobil Uyumluluk */
-        @media (max-width: 768px) {
-            .hero h2 { font-size: 24px; }
-            .categories-container { justify-content: flex-start; }
-            .look-section { flex-direction: column; padding: 20px; text-align: center; }
-            .look-img { height: 250px; width: 100%; flex: none; }
-            .newsletter input { margin-bottom: 15px; width: 100%; margin-right: 0; }
+        /* TELEFON AYARLARI (RESPONSIVE) */
+        @media (max-width: 900px) {
+            header h1 { font-size: 20px; letter-spacing: 5px; }
+            .hero { height: 45vh; margin: 0 15px 30px 15px; border-radius: 15px; }
+            .hero h2 { font-size: 22px; }
+            .hero p { font-size: 14px; }
+            .product-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 0 15px; }
+            .look-section { flex-direction: column; margin: 60px 15px; padding: 30px; gap: 30px; text-align: center; }
+            .look-img { height: 300px; width: 100%; }
+            .newsletter { margin: 60px 15px; padding: 40px 20px; }
+            .newsletter input { width: 100%; margin-right: 0; margin-bottom: 15px; }
+            .btn-subscribe { width: 100%; }
+            .categories-container { gap: 10px; overflow-x: auto; justify-content: flex-start; padding: 0 15px 20px 15px; flex-wrap: nowrap; }
+            .btn-shop { padding: 10px 20px; font-size: 10px; }
         }
     </style>
 </head>
@@ -266,7 +245,7 @@
 
     <section class="hero">
         <h2>1 AKSESUAR ALANA<br>ANAHTARLIK BİZDEN!</h2>
-        <p>Soft Işıltıyı ve Kış Şıklığını Keşfet</p>
+        <p>Işıltılı Kış Koleksiyonu</p>
     </section>
 
     <div class="categories-container">
@@ -279,122 +258,73 @@
 
     <h3 class="section-title">En Çok Sevilenler</h3>
     <div class="product-grid">
-        <div class="product-card">
-            <div class="product-img">KOLYE RESMİ</div>
-            <p class="product-title">Kış Zinciri Kolye</p>
-            <p class="price">249,00 TL</p>
-        </div>
-        <div class="product-card">
-            <div class="product-img">YÜZÜK RESMİ</div>
-            <p class="product-title">Rose Baget Yüzük</p>
-            <p class="price">189,00 TL</p>
-        </div>
-        <div class="product-card">
-            <div class="product-img">KÜPE RESMİ</div>
-            <p class="product-title">Minimal Küpe</p>
-            <p class="price">159,00 TL</p>
-        </div>
-        <div class="product-card">
-            <div class="product-img">BİLEKLİK RESMİ</div>
-            <p class="product-title">Işıltılı Bileklik</p>
-            <p class="price">219,00 TL</p>
-        </div>
-        <div class="product-card">
-            <div class="product-img">HALHAL RESMİ</div>
-            <p class="product-title">Yıldız Figür Halhal</p>
-            <p class="price">129,00 TL</p>
-        </div>
-        <div class="product-card">
-            <div class="product-img">ANAHTARLIK RESMİ</div>
-            <p class="product-title">Motto Anahtarlık</p>
-            <p class="price">89,00 TL</p>
-        </div>
+        <div class="product-card"><div class="product-img">RESİM</div><p class="product-title">Zincir Kolye</p><p class="price">249 TL</p></div>
+        <div class="product-card"><div class="product-img">RESİM</div><p class="product-title">Baget Yüzük</p><p class="price">189 TL</p></div>
+        <div class="product-card"><div class="product-img">RESİM</div><p class="product-title">Minimal Küpe</p><p class="price">159 TL</p></div>
+        <div class="product-card"><div class="product-img">RESİM</div><p class="product-title">Gold Bileklik</p><p class="price">219 TL</p></div>
     </div>
 
     <section class="look-section">
         <div class="look-img"></div>
         <div class="look-text">
             <h3>Haftanın Kombini</h3>
-            <p>Kışın en asil rengi antrasit ve Rose Gold'un mükemmel uyumu. Minimalist takılarımızla kış stilini tamamla. Sezonun en hit parçası 'Soft Zincir Kolye' ve 'Rose Baget Yüzük' bu hafta sadece 399 TL!</p>
-            <a href="#" class="btn-shop">KOMBİNİ KEŞFET</a>
+            <p>Kışın soğuk havasını Rose Gold'un sıcak ışıltısıyla kırın. Minimalist tasarımlarımız her kıyafetinize asalet katmak için tasarlandı.</p>
+            <a href="#" class="btn-shop">KOMBİNİ İNCELE</a>
         </div>
     </section>
 
     <section class="newsletter">
-        <h3>İndirimlerden Haberdar Ol</h3>
-        <p>E-posta listemize katıl, yeni koleksiyonlar ve özel fırsatları kaçırma.</p>
-        <form>
-            <input type="email" placeholder="E-posta adresiniz..." required>
-            <button type="submit" class="btn-subscribe">ABONE OL</button>
-        </form>
+        <h3>Özel Fırsatları Kaçırma</h3>
+        <input type="email" placeholder="E-posta adresinizi yazın">
+        <button class="btn-subscribe">Abone Ol</button>
     </section>
 
-    <footer>
-        &copy; 2026 BASAKACCESORIES - ALL RIGHTS RESERVED.
-    </footer>
+    <footer>&copy; 2026 BASAKACCESORIES</footer>
 
     <script>
-        // Kar Efekti Scripti (Geliştirilmiş)
         const canvas = document.getElementById('snowCanvas');
         const ctx = canvas.getContext('2d');
+        let width, height, snowflakes;
 
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const snowflakes = [];
-
-        class Snowflake {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.radius = Math.random() * 2 + 0.5; // Kar tanesi boyutu
-                this.speed = Math.random() * 1.5 + 0.5; // Kar tanesi hızı (yavaşlatıldı)
-                this.wind = Math.random() * 0.5 - 0.25; // Hafif rüzgar etkisi
-            }
-
-            fall() {
-                this.y += this.speed;
-                this.x += this.wind; // Rüzgarla yana kayma
-
-                if (this.y > canvas.height) {
-                    this.y = -5;
-                    this.x = Math.random() * canvas.width;
-                }
-                // Ekranın yanlarından çıkarsa diğer taraftan girsin
-                if (this.x > canvas.width) {
-                    this.x = 0;
-                } else if (this.x < 0) {
-                    this.x = canvas.width;
-                }
-            }
-
-            draw() {
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.6)'; // Yumuşak beyaz kar
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fill();
-            }
+        function init() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+            snowflakes = [];
+            const count = width < 900 ? 60 : 180; // Mobilde az, PC'de çok kar
+            for(let i=0; i<count; i++) snowflakes.push(new Snowflake());
         }
 
-        for (let i = 0; i < 150; i++) { // Kar tanesi sayısı
-            snowflakes.push(new Snowflake());
+        class Snowflake {
+            constructor() { this.reset(); this.y = Math.random() * height; }
+            reset() {
+                this.x = Math.random() * width;
+                this.y = -10;
+                this.radius = Math.random() * (width < 900 ? 1.5 : 2.5) + 0.5;
+                this.speed = Math.random() * 0.8 + 0.2;
+                this.wind = Math.random() * 0.3 - 0.15;
+            }
+            update() {
+                this.y += this.speed;
+                this.x += this.wind;
+                if(this.y > height) this.reset();
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2); ctx.fill();
+            }
         }
 
         function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            snowflakes.forEach(flake => {
-                flake.fall();
-                flake.draw();
-            });
+            ctx.clearRect(0, 0, width, height);
+            snowflakes.forEach(s => { s.update(); s.draw(); });
             requestAnimationFrame(animate);
         }
 
+        window.addEventListener('resize', init);
+        init();
         animate();
-
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
     </script>
 </body>
 </html>
